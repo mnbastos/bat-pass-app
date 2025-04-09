@@ -5,6 +5,8 @@ import { styles } from './BatButtonStyle';
 import { BatTextInput } from '../BatTextInput/BatTextInput';
 import generatePass from '../../services/passwordService';
 
+import * as Clipboard from 'expo-clipboard'
+
 export function BatButton() {
   const [pass, setPass] = useState('')
 
@@ -12,6 +14,11 @@ export function BatButton() {
     let generateToken  = generatePass()
     setPass(generateToken)
   }
+
+function handleCopyButton(){
+  Clipboard.setStringAsync(pass)
+
+}
 
   return (
     <>
@@ -23,7 +30,7 @@ export function BatButton() {
             <Text style = {styles.texto}> ⚡GENERATE </Text>
         </Pressable>
         <Pressable 
-            onPress={()=>{console.log("Copiar")}}
+            onPress={handleCopyButton}
             style = {styles.button}
             >
             <Text style = {styles.texto}> ⚡COPY </Text>
